@@ -4,6 +4,15 @@ const router = express.Router();
 const Todo = require('../models/todos.js');
 
 
+
+
+var dbName = 'todoDB';
+var connectionString = 'mongodb://localhost:27017/' + dbName;
+
+mongoose.connect(connectionString);
+
+mongoose.Promise = Promise // setting mongoose's Promise to use Node's Promise
+
 router.get('/todos',(req, res, next) => {
 
     Todo.find({},'action').then(data => res.json(data)).catch(next);
